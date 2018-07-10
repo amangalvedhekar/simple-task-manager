@@ -72,7 +72,7 @@ class TasksPage extends Component {
 
   render() {
     return (
-      <div className="tasks">
+      <div className="jumbotron">
         <div className="tasks-header">
           <button
             className="button button-default"

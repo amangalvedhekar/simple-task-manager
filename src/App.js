@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import TasksPage from './components/TasksPage';
-import {mockTasks} from './mocks';
+
 import {
   createTask,
   editTask
 } from './actions';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 class App extends Component {
@@ -18,10 +19,10 @@ class App extends Component {
   };
 
   render() {
-    console.log('props from app', this.props);
+
     return (
       <div
-        className="main-content">
+        className="container-fluid">
         <TasksPage
           tasks={this.props.tasks}
           onCreateTask={this.onCreateTask}

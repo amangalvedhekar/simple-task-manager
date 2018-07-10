@@ -8,7 +8,6 @@ const TASK_STATUSES = [
 
 
 const Task = props => {
-  console.log('props inside task', props);
   return (
     <div className="task">
       <div className="task-header">
@@ -37,7 +36,6 @@ const Task = props => {
   );
 
   function onStatusChange(e) {
-    console.log(e.target.value);
     props.onStatusChange(props.task.id, e.target.value);
   }
 };
