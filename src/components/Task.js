@@ -1,12 +1,6 @@
 import React from 'react';
 import TaskStatus from './TaskStatus';
-
-const TASK_STATUSES = [
-  'Unstarted',
-  'In Progress',
-  'Completed'
-];
-
+import { TASK_STATUSES }  from '../constants';
 
 const Task = props => {
   return (
