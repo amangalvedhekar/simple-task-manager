@@ -1,4 +1,5 @@
 import React from 'react';
+import TaskStatus from './TaskStatus';
 
 const TASK_STATUSES = [
   'Unstarted',
@@ -12,21 +13,14 @@ const Task = props => {
     <div className="task">
       <div className="task-header">
         <div>
-          { props.task.title }
+          <h3>{ props.task.title }</h3>
         </div>
-        <select
-          value={props.task.status}
-          onChange={onStatusChange}>
-          {TASK_STATUSES.map((task, index) => {
-            return(
-              <option
-                key={index}
-                value={task}>
-                {task}
-              </option>
-            );
-          })}
-        </select>
+        <TaskStatus
+          status={props.task.status}
+          taskId={props.task.id}
+          list={TASK_STATUSES}
+          onStatusChange={props.onStatusChange}
+        />
       </div>
       <hr/>
       <div className="task-body">
@@ -34,10 +28,6 @@ const Task = props => {
       </div>
     </div>
   );
-
-  function onStatusChange(e) {
-    props.onStatusChange(props.task.id, e.target.value);
-  }
 };
 
 export default Task;
