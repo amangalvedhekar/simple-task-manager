@@ -1,11 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import TaskList from './TaskList';
 
-const TASK_STATUSES = [
-  'Unstarted',
-  'In Progress',
-  'Completed'
-];
+import { TASK_STATUSES } from '../constants';
 
 class TasksPage extends Component {
   constructor(props) {
@@ -14,20 +10,15 @@ class TasksPage extends Component {
       showNewCardForm: false,
       title: '',
       description: '',
-      status: 'Unstarted'
     };
   }
 
   onTitleChange = e => {
-    this.setState({
-      title: e.target.value,
-    });
+    this.setState({ title: e.target.value });
   };
 
   onDescriptionChange = e => {
-    this.setState({
-      description: e.target.value,
-    });
+    this.setState({ description: e.target.value });
   };
 
   resetForm() {
@@ -36,7 +27,7 @@ class TasksPage extends Component {
       title: '',
       description: '',
     });
-  };
+  }
 
   onCreateTask = e => {
     e.preventDefault();
@@ -48,43 +39,27 @@ class TasksPage extends Component {
   };
 
   toggleForm = () => {
-    this.setState({
-      showNewCardForm: !this.state.showNewCardForm,
-    });
-  };
-
-
-
-  renderTaskLists() {
-    const { onStatusChange, tasks } = this.props;
-    return TASK_STATUSES.map(status => {
-      const statusTasks = tasks.filter(task => task.status === status);
-      return (
-        <TaskList
-          key={status}
-          status={status}
-          tasks={statusTasks}
-          onStatusChange={onStatusChange}
-        />
-      );
-    });
+    this.setState({ showNewCardForm: !this.state.showNewCardForm });
   };
 
   render() {
+    if (this.props.isLoading) {
+      return (
+        <div className="tasks-loading">
+          Loading...
+        </div>
+      );
+    }
+
     return (
-      <div className="jumbotron">
+      <div className="tasks">
         <div className="tasks-header">
-          <button
-            className="button button-default"
-            onClick={this.toggleForm}>
+          <button className="button button-default" onClick={this.toggleForm}>
             + New task
           </button>
         </div>
-
         {this.state.showNewCardForm &&
-        <form
-          className="new-task-form"
-          onSubmit={this.onCreateTask}>
+        <form className="new-task-form" onSubmit={this.onCreateTask}>
           <input
             className="full-width-input"
             onChange={this.onTitleChange}
@@ -99,20 +74,28 @@ class TasksPage extends Component {
             type="text"
             placeholder="description"
           />
-          <button
-            className="button"
-            type="submit">
+          <button className="button" type="submit">
             Save
           </button>
         </form>}
-
-        <div
-          className="task-lists">
-          {this.renderTaskLists()}
+        <div className="task-lists">
+          {TASK_STATUSES.map(status => {
+            const statusTasks = this.props.tasks.filter(
+              task => task.status === status
+            );
+            return (
+              <TaskList
+                key={status}
+                status={status}
+                tasks={statusTasks}
+                onStatusChange={this.props.onStatusChange}
+              />
+            );
+          })}
         </div>
       </div>
     );
-  };
+  }
 }
 
 export default TasksPage;

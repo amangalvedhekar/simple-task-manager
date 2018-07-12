@@ -1,20 +1,26 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import TasksPage from './components/TasksPage';
 
 import {
   createTask,
-  editTask
+  editTask,
+  fetchTasks,
 } from './actions';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(fetchTasks());
+  }
+
   onCreateTask = ({ title, description }) => {
-    this.props.dispatch(createTask({title, description}));
+    this.props.dispatch(createTask({ title, description }));
   };
 
-  onStatusChange= (id, status) => {
+  onStatusChange = (id, status) => {
     this.props.dispatch(editTask(id, { status }));
   };
 
@@ -34,9 +40,8 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    tasks: state.tasks,
-  }
+  const { tasks, isLoading, error } = state.tasks;
+  return { tasks, isLoading, error };
 }
 
 export default connect(mapStateToProps)(App);
