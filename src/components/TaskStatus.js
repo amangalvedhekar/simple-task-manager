@@ -1,5 +1,6 @@
 import React from 'react';
 
+//ToDo: use react-select
 const TaskStatus = props => {
   return (
     <select
