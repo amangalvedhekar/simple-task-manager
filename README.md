@@ -28,6 +28,6 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 ```
-## Graphical Presentation of thunk work
+## Graphical Presentation of redux with thunk
 
 ![](public/redux.jpg?raw=true)
