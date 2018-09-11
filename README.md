@@ -35,6 +35,13 @@ ReactDOM.render(element, document.getElementById('root'));
     * are read only
     * Components defined by class and function have access to props
     * passed down from parent to child component thus facilitating uni directional flow of data
+    * default value can be provided by `ComponentName.defaultProps = {propName: value}`
+    * `prop-types` package can be used for type check 
+    ```javascript
+    ComponentName.propTypes = {
+      propName: PropTypes.type.isRequired
+    }
+    ```
 
   * State
     * are private members 
